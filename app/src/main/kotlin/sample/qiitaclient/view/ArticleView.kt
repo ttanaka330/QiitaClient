@@ -1,8 +1,6 @@
 package sample.qiitaclient.view
 
-import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -24,7 +22,6 @@ class ArticleView : FrameLayout {
                 attrs: AttributeSet?,
                 defaultStyleAttr: Int) : super(context, attrs, defaultStyleAttr)
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context?,
                 attrs: AttributeSet?,
                 defaultStyleAttr: Int,
