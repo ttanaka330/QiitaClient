@@ -6,10 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.ProgressBar
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import dagger.android.AndroidInjection
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import sample.qiitaclient.client.ArticleClient
 import javax.inject.Inject
 
@@ -20,17 +21,17 @@ class MainActivity : RxAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (application as QiitaClientApp).component.inject(this)
+        AndroidInjection.inject(this)
         setContentView(R.layout.activity_main)
 
-        val listView = findViewById(R.id.list_view) as ListView
-        val progressBar = findViewById(R.id.progress_bar) as ProgressBar
-        val queryEditText = findViewById(R.id.query_edit_text) as EditText
-        val searchButton = findViewById(R.id.search_button) as Button
+        val listView = findViewById<ListView>(R.id.list_view)
+        val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
+        val queryEditText = findViewById<EditText>(R.id.query_edit_text)
+        val searchButton = findViewById<Button>(R.id.search_button)
 
         val listAdapter = ArticleListAdapter(applicationContext)
         listView.adapter = listAdapter
-        listView.setOnItemClickListener { adapterView, view, position, id ->
+        listView.setOnItemClickListener { _, _, position, _ ->
             val intent = ArticleActivity.intent(this, listAdapter.articles[position])
             startActivity(intent)
         }

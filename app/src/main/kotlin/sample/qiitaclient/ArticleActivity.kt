@@ -22,11 +22,11 @@ class ArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
 
-        val articleView = findViewById(R.id.article_view) as ArticleView
-        val webView = findViewById(R.id.web_view) as WebView
+        val articleView = findViewById<ArticleView>(R.id.article_view)
+        val webView = findViewById<WebView>(R.id.web_view)
 
         val article: Article = intent.getParcelableExtra(ARTICLE_EXTRA)
-        articleView.setArthicle(article)
+        articleView.setArticle(article)
         webView.loadUrl(article.url)
     }
 }

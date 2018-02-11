@@ -19,7 +19,7 @@ class ArticleListAdapter(private val context: Context) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View =
             ((convertView as? ArticleView) ?: ArticleView(context)).apply {
-                setArthicle(articles[position])
+                setArticle(articles[position])
             }
 
 }

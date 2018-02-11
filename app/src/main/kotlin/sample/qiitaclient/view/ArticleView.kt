@@ -1,6 +1,8 @@
 package sample.qiitaclient.view
 
+import android.annotation.TargetApi
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -22,20 +24,21 @@ class ArticleView : FrameLayout {
                 attrs: AttributeSet?,
                 defaultStyleAttr: Int) : super(context, attrs, defaultStyleAttr)
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context?,
                 attrs: AttributeSet?,
                 defaultStyleAttr: Int,
                 defaultStyleRes: Int) : super(context, attrs, defaultStyleAttr, defaultStyleRes)
 
-    val profileImageView: ImageView by bindView(R.id.profile_image_view)
-    val titleTextView: TextView? by bindView(R.id.title_text_view)
-    val userNameTextView: TextView? by bindView(R.id.user_name_text_view)
+    private val profileImageView: ImageView by bindView(R.id.profile_image_view)
+    private val titleTextView: TextView? by bindView(R.id.title_text_view)
+    private val userNameTextView: TextView? by bindView(R.id.user_name_text_view)
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.view_arthicle, this)
+        LayoutInflater.from(context).inflate(R.layout.view_article, this)
     }
 
-    fun setArthicle(article: Article) {
+    fun setArticle(article: Article) {
         titleTextView?.text = article.title
         userNameTextView?.text = article.user.name
         Glide.with(context).load(article.user.profileImageUrl).into(profileImageView)

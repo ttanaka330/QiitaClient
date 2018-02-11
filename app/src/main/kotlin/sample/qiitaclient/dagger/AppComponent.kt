@@ -1,12 +1,23 @@
 package sample.qiitaclient.dagger
 
 import dagger.Component
-import sample.qiitaclient.MainActivity
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
+import sample.qiitaclient.QiitaClientApp
 import javax.inject.Singleton
 
-@Component(modules = arrayOf(ClientModule::class))
+@Component(modules = [
+    AndroidSupportInjectionModule::class,
+    ClientModule::class,
+    ActivityModule::class
+])
 @Singleton
-interface AppComponent {
+interface AppComponent: AndroidInjector<QiitaClientApp> {
 
-    fun inject(mainActivity: MainActivity)
+    @Component.Builder
+    interface Builder {
+        fun build(): AppComponent
+    }
+
+    override fun inject(qiitaClientApp: QiitaClientApp)
 }

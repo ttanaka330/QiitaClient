@@ -1,12 +1,14 @@
 package sample.qiitaclient
 
-import android.app.Application
-import sample.qiitaclient.dagger.AppComponent
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 import sample.qiitaclient.dagger.DaggerAppComponent
 
-class QiitaClientApp : Application() {
+class QiitaClientApp : DaggerApplication() {
 
-    val component: AppComponent by lazy {
-        DaggerAppComponent.create()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder()
+                .build()
     }
+
 }

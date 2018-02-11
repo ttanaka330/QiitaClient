@@ -10,9 +10,8 @@ data class User(val id: String,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<User> = object : Parcelable.Creator<User> {
-            override fun createFromParcel(source: Parcel): User = source.run {
-                User(readString(), readString(), readString())
-            }
+            override fun createFromParcel(source: Parcel): User =
+                    source.run { User(readString(), readString(), readString()) }
 
             override fun newArray(size: Int): Array<User?> = arrayOfNulls(size)
         }
